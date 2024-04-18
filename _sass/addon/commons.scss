@@ -129,6 +129,11 @@ kbd {
   box-shadow: inset 0 -2px 0 var(--kbd-wrap-color);
 }
 
+hr {
+  border-color: var(--main-border-color);
+  opacity: 1;
+}
+
 footer {
   background-color: var(--main-bg);
   height: $footer-height;
@@ -364,7 +369,6 @@ main {
 
   h1 {
     margin-top: 2rem;
-    margin-bottom: 1.5rem;
   }
 
   p {
@@ -550,17 +554,32 @@ main {
   width: 100%;
   height: 100%;
   margin-bottom: 1rem;
+  aspect-ratio: 16 / 9;
 
   @extend %rounded;
-
-  &.youtube,
-  &.bilibili {
-    aspect-ratio: 16 / 9;
-  }
 
   &.twitch {
     aspect-ratio: 310 / 189;
   }
+
+  &.file {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    margin-bottom: 0;
+  }
+
+  @extend %img-caption;
+}
+
+.embed-audio {
+  width: 100%;
+  display: block;
+
+  @extend %img-caption;
 }
 
 /* --- buttons --- */
@@ -652,18 +671,6 @@ main {
 }
 
 /* --- Overriding --- */
-
-/* magnific-popup */
-
-figure .mfp-title {
-  text-align: center;
-  padding-right: 0;
-  margin-top: 0.5rem;
-}
-
-.mfp-img {
-  transition: none;
-}
 
 /* mermaid */
 .mermaid {
@@ -857,7 +864,7 @@ $btn-mb: 0.5rem;
       line-height: $btn-size;
     }
 
-    .mode-toggle {
+    #mode-toggle {
       padding: 0;
       border: 0;
 
@@ -1139,7 +1146,8 @@ search {
 /* --- button back-to-top --- */
 
 #back-to-top {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
   z-index: 1;
   cursor: pointer;
   position: fixed;
@@ -1152,8 +1160,7 @@ search {
   height: $back2top-size;
   border-radius: 50%;
   border: 1px solid var(--btn-backtotop-border-color);
-  transition: transform 0.2s ease-out;
-  -webkit-transition: transform 0.2s ease-out;
+  transition: opacity 0.5s ease-in-out, transform 0.2s ease-out;
 
   &:hover {
     transform: translate3d(0, -5px, 0);
@@ -1164,6 +1171,11 @@ search {
     line-height: $back2top-size;
     position: relative;
     bottom: 2px;
+  }
+
+  &.show {
+    opacity: 1;
+    visibility: visible;
   }
 }
 
